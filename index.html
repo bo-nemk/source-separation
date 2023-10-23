@@ -68,6 +68,7 @@
         <!-- Third Column -->
         <div class="column">
             <h3>Download Separated WAV Files</h3>
+                <button id="downloadButtonInput">Download Input</button>
                 <button id="downloadButtonVocals">Download Vocals</button>
                 <button id="downloadButtonRemainder">Download Remainder</button>
         </div>
@@ -98,6 +99,7 @@
     <!-- Load -->
     <script>
         console.log("Initializing Module...");
+        console.log("NOTE: Page may seem unresponsive!");
         var Module = {
             onRuntimeInitialized: function() {
                 console.log("Initializing Module OK");
@@ -108,15 +110,11 @@
 
     <!-- Script for run button-->
     <script>
-        document.getElementById('runButton').addEventListener('click', function() {
-                console.log("Pressed run...")
-                try {
-                    Module._runOnnxModel()
-                } catch(e) {
-                    console.error(e)
-                    return
-                }
-                console.log("Pressed run OK")
+        document.getElementById('runButton').addEventListener('click', async function() {
+                console.log("Running Module...");
+                console.log("NOTE: Page may seem unresponsive!");
+                Module._runOnnxModel()
+                console.log("Running Module OK");
             });
     </script>
 
@@ -189,6 +187,9 @@
         }
     </script>
     <script>
+        document.getElementById('downloadButtonInput').addEventListener('click', function() {
+            wavDownload("in.wav")
+        });
         document.getElementById('downloadButtonVocals').addEventListener('click', function() {
             wavDownload("vocals.wav")
         });
